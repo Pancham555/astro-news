@@ -18,7 +18,8 @@ const category = categoriesHandler.oneCategory(article.data.category.id);
 ---
 
 <article class="group relative isolate flex flex-col-reverse md:flex-col gap-4">
-  <div class="aspect-video overflow-hidden rounded-md">
+  <div class="aspect-video overflow-hidden">
+    <!-- rounded-md -->
     <Image
       src={article.data.cover}
       alt={article.data.covert_alt
@@ -31,8 +32,7 @@ const category = categoriesHandler.oneCategory(article.data.category.id);
   <div class="flex flex-col gap-2">
     <div>
       <h2
-        class="text-xl font-semibold lg:group-hover:underline underline-offset-2"
-      >
+        class="text-xl font-semibold lg:group-hover:underline underline-offset-2">
         <a href={`/articles/${article.id}`}>
           <span class="absolute inset-0 z-10 pointer-events-none"></span>
           {article.data.title}

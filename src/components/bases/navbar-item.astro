@@ -31,7 +31,8 @@ function formatHref(href: string) {
     isActive(item, currentPath)
       ? "after:bg-base-content pointer-events-none"
       : "after:bg-transparent",
-  ]}
->
-  <a href={formatHref(item.href)} aria-label={item.text}>{item.text}</a>
+  ]}>
+  <a href={formatHref(item.href)} aria-label={item.text} class="text-base"
+    >{item.text}</a
+  >
 </li>

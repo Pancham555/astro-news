@@ -7,7 +7,7 @@ export default config({
   },
   ui: {
     brand: {
-      name: "Astro News",
+      name: "The Nomad",
     },
     navigation: ["---", "articles", "---", "authors", "categories"],
   },

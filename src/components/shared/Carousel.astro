@@ -21,20 +21,20 @@ const {
 ---
 
 <div
-  class="relative w-full overflow-hidden rounded-lg"
+  class="relative w-full overflow-hidden"
   data-carousel="true"
   data-autoplay={autoplay.toString()}
-  data-interval={interval.toString()}
->
+  data-interval={interval.toString()}>
+  <!-- rounded-lg -->
   <!-- Carousel wrapper -->
-  <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+  <div class="relative h-56 overflow-hidden md:h-96">
+    <!-- rounded-lg -->
     {
       images.map((image, index) => (
         <div
           class="absolute top-0 left-0 w-full h-full transition-transform duration-700 ease-in-out transform translate-x-full"
           data-slide
-          aria-hidden={index !== 0}
-        >
+          aria-hidden={index !== 0}>
           <img
             src={image.src || "/placeholder.svg"}
             alt={image.alt}
@@ -51,11 +51,12 @@ const {
       images.map((_, index) => (
         <button
           type="button"
-          class={`w-3 h-3 rounded-full ${index === 0 ? "bg-white" : "bg-white/50"}`}
+          class={`w-3 h-3 ${index === 0 ? "bg-white" : "bg-white/50"}`}
           aria-current={index === 0}
           aria-label={`Slide ${index + 1}`}
           data-carousel-indicator
         />
+        // rounded-full
       ))
     }
   </div>
@@ -64,18 +65,16 @@ const {
   <button
     type="button"
     class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-    data-carousel-prev
-  >
+    data-carousel-prev>
     <span
-      class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
-    >
+      class="inline-flex items-center justify-center w-10 h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+      <!-- rounded-full -->
       <svg
         class="w-4 h-4 text-white dark:text-gray-800"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
-        viewBox="0 0 6 10"
-      >
+        viewBox="0 0 6 10">
         <path
           stroke="currentColor"
           stroke-linecap="round"

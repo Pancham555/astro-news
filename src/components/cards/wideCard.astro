@@ -34,8 +34,9 @@ const { article, isLast } = Astro.props;
           : article.data.title}
         layout="constrained"
         loading={"eager"}
-        class="aspect-video rounded w-full h-full"
+        class="aspect-video w-full h-full"
       />
+      <!-- rounded -->
     </div>
     <div class="flex-1 space-y-2">
       <h3 class="text-xl font-semibold lg:group-hover:underline">

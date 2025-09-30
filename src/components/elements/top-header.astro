@@ -7,8 +7,7 @@ import ThemeController from "../bases/theme-controller.astro";
 ---
 
 <div
-  class="navbar border-b border-primary-content/80 dark:border-primary-content/20"
->
+  class="navbar border-b border-primary-content/80 dark:border-primary-content/20">
   <div class="navbar-start lg:w-1/2">
     <MenuDropdown />
     <a class="text-xl px-2 text-nowrap lg:hidden" href="/">{SITE.title}</a>
@@ -17,17 +16,17 @@ import ThemeController from "../bases/theme-controller.astro";
     <a class="text-xl px-2" href="/">{SITE.title}</a>
   </div>
   <div class="navbar-end">
-    <ThemeController />
     <a class="btn btn-ghost btn-circle" href="/search" aria-label="Search">
       <Search01 />
     </a>
-    <a
+    <ThemeController />
+    <!-- <a
       class="btn btn-ghost btn-circle"
       href={SITE.github}
       target="_blank"
       aria-label="GitHub"
     >
       <Github />
-    </a>
+    </a> -->
   </div>
 </div>
