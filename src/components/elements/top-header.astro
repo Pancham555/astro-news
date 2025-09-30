@@ -10,9 +10,13 @@ import ThemeController from "../bases/theme-controller.astro";
   class="navbar border-b border-primary-content/80 dark:border-primary-content/20">
   <div class="navbar-start lg:w-1/2">
     <MenuDropdown />
-    <a class="text-xl px-2 text-nowrap lg:hidden" href="/">{SITE.title}</a>
+    <div class="lg:hidden flex items-center">
+      <img src="/The_Nomad.png" alt="logo" class="w-6" />
+      <a class="text-xl px-2 text-nowrap" href="/">{SITE.title}</a>
+    </div>
   </div>
-  <div class="navbar-center hidden lg:flex">
+  <div class="navbar-center hidden lg:flex items-center">
+    <img src="/The_Nomad.png" alt="logo" class="w-6" />
     <a class="text-xl px-2" href="/">{SITE.title}</a>
   </div>
   <div class="navbar-end">
