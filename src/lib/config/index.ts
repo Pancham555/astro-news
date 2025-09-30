@@ -4,8 +4,8 @@ export const SITE = {
   title: "The Nomad",
   description: "A news website built with Astro",
   author: "Mohammad Rahmani",
-  url: "https://astro-news-six.vercel.app",
-  github: "https://github.com/Mrahmani71/astro-news",
+  url: "https://the-nomad.vercel.app",
+  github: "https://github.com/Pancham555/astro-news",
   locale: "en-US",
   dir: "ltr",
   charset: "UTF-8",
@@ -66,11 +66,11 @@ export const OTHER_LINKS: Link[] = [
     text: "Cookie Policy",
   },
   {
-    href: "https://astro-news-six.vercel.app/rss.xml",
+    href: "https://the-nomad.vercel.app/rss.xml",
     text: "RSS",
   },
   {
-    href: "https://astro-news-six.vercel.app/sitemap-index.xml",
+    href: "https://the-nomad.vercel.app/sitemap-index.xml",
     text: "Sitemap",
   },
 ];

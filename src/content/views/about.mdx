@@ -5,10 +5,10 @@ blocks:
   - name: "ABOUT"
     title: "About us"
 ---
-import screenshot from '../../assets/images/screenshot-astronews.png';
-import performances from '../../assets/images/Performances.png';
-import { Image } from 'astro:assets';
 
+import screenshot from "../../assets/images/screenshot-astronews.png";
+import performances from "../../assets/images/Performances.png";
+import { Image } from "astro:assets";
 
 # Astro News 📰
 
@@ -17,8 +17,20 @@ A news website built with Astro, designed to provide a modern and responsive new
 > **ℹ️ Info**  
 > Astro news is my first open-source project, so there may be some bugs or issues. I’ll address them as quickly as possible.
 
-<Image src={screenshot} alt="Astro News" layout="constrained" class="rounded-lg shadow-xl" />
-<Image src={performances} alt="PageSpeed Insights result" layout="constrained" class="rounded-lg shadow-xl" />
+<Image
+  src={screenshot}
+  alt="Astro News"
+  layout="constrained"
+  class="shadow-xl"
+/>
+{/* rounded-lg */}
+<Image
+  src={performances}
+  alt="PageSpeed Insights result"
+  layout="constrained"
+  class=" shadow-xl"
+/>
+{/* rounded-lg */}
 
 ## 🌐 Demo
 
@@ -36,7 +48,7 @@ git clone https://github.com/Mrahmani71/astro-news.git
 
 ### Install Dependencies
 
-``` bash
+```bash
 bun install
 ```
 
@@ -50,7 +62,7 @@ bun dev
 
 1. Rename `.env.example` to `.env`.
 
-2.  Set `RUN_KEYSTATIC=true`.
+2. Set `RUN_KEYSTATIC=true`.
 
 3. Start the development server:
 
@@ -93,7 +105,7 @@ This project leverages cutting-edge web technologies:
 - [Vercel](https://vercel.com) - Deployment platform
 - [HugeIcons](https://hugeicons.com) - Icon library
 
-## 💡  Inspirations and Code Concepts
+## 💡 Inspirations and Code Concepts
 
 This project draws inspiration from the following sources:
 
