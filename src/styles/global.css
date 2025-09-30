@@ -9,8 +9,8 @@
 
 @theme {
   /* Font Family */
-  --font-sans: "PT Serif", serif;
-  --font-serif: "PT Serif", serif;
+  --font-sans: "Crimson Text", serif;
+  --font-serif: "Crimson Text", serif;
 
   --breakpoint-2xl: initial;
 }
