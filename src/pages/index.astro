@@ -5,6 +5,7 @@ import Headlines from "@/pages/_home/headlines.astro";
 import LatestNews from "@/pages/_home/latestNews.astro";
 import Authors from "@/pages/_home/authors.astro";
 import "../styles/global.css";
+// import Carousel from "@/components/shared/Carousel.astro";
 const entry = await getEntry("views", "home");
 
 if (!entry) {
@@ -14,6 +15,7 @@ if (!entry) {
 
 <BaseLayout entry={entry}>
   <Headlines />
+  <!-- <Carousel /> -->
   <LatestNews />
   <Authors />
 </BaseLayout>

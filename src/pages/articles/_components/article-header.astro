@@ -23,14 +23,14 @@ const authors = authorsHandler.getAuthors(article.data.authors);
 
 <section
   class="mb-8 flex flex-col lg:flex-col-reverse border-b border-b-base-300 lg:border-none pb-4 pt-0 lg:pt-6">
-  <div class="container px-0 max-w-5xl lg:mt-4 overflow-hidden aspect-[20/9]">
+  <div class="container px-0 max-w-5xl lg:mt-4 overflow-hidden aspect-[16/9]">
     <!-- lg:rounded-md -->
     <Picture
       src={article.data.cover}
       alt="article"
       layout="full-width"
       loading={"eager"}
-      formats={["avif", "webp"]}
+      formats={["avif", "webp","jpeg","jpg","png"]}
       class="w-full h-full object-center"
     />
   </div>

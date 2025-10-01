@@ -11,9 +11,9 @@ interface Props {
 
 const {
   images = [
-    { src: "/placeholder.svg?height=400&width=800", alt: "Slide 1" },
-    { src: "/placeholder.svg?height=400&width=800", alt: "Slide 2" },
-    { src: "/placeholder.svg?height=400&width=800", alt: "Slide 3" },
+    { src: "https://image-processor-storage.s3.us-west-2.amazonaws.com/images/3cf61c1011912a2173ea4dfa260f1108/halo-of-neon-ring-illuminated-in-the-stunning-landscape-of-yosemite.jpg", alt: "Slide 1" },
+    { src: "https://media.istockphoto.com/id/517188688/photo/mountain-landscape.jpg?s=612x612&w=0&k=20&c=A63koPKaCyIwQWOTFBRWXj_PwCrR4cEoOw2S9Q7yVl8=", alt: "Slide 2" },
+    { src: "https://thumbs.dreamstime.com/b/environment-earth-day-hands-trees-growing-seedlings-bokeh-green-background-female-hand-holding-tree-nature-field-118143566.jpg", alt: "Slide 3" },
   ],
   autoplay = true,
   interval = 5000,
@@ -21,19 +21,19 @@ const {
 ---
 
 <div
-  class="relative w-full overflow-hidden"
+  class="relative w-full overflow-hidden bg-green-200"
   data-carousel="true"
   data-autoplay={autoplay.toString()}
   data-interval={interval.toString()}>
-  <!-- rounded-lg -->
   <!-- Carousel wrapper -->
   <div class="relative h-56 overflow-hidden md:h-96">
-    <!-- rounded-lg -->
     {
       images.map((image, index) => (
         <div
-          class="absolute top-0 left-0 w-full h-full transition-transform duration-700 ease-in-out transform translate-x-full"
+          class="absolute top-0 left-0 w-full h-full transition-transform duration-700 ease-in-out"
           data-slide
+          data-slide-index={index}
+          style={index === 0 ? "transform: translateX(0);" : "transform: translateX(100%);"}
           aria-hidden={index !== 0}>
           <img
             src={image.src || "/placeholder.svg"}
@@ -51,12 +51,12 @@ const {
       images.map((_, index) => (
         <button
           type="button"
-          class={`w-3 h-3 ${index === 0 ? "bg-white" : "bg-white/50"}`}
+          class={`w-3 h-3 transition-colors ${index === 0 ? "bg-white" : "bg-white/50"}`}
           aria-current={index === 0}
           aria-label={`Slide ${index + 1}`}
           data-carousel-indicator
+          data-indicator-index={index}
         />
-        // rounded-full
       ))
     }
   </div>
@@ -68,7 +68,6 @@ const {
     data-carousel-prev>
     <span
       class="inline-flex items-center justify-center w-10 h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-      <!-- rounded-full -->
       <svg
         class="w-4 h-4 text-white dark:text-gray-800"
         aria-hidden="true"
@@ -85,4 +84,156 @@ const {
       <span class="sr-only">Previous</span>
     </span>
   </button>
+  <button
+    type="button"
+    class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+    data-carousel-next>
+    <span
+      class="inline-flex items-center justify-center w-10 h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+      <svg
+        class="w-4 h-4 text-white dark:text-gray-800"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 6 10">
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m1 9 4-4-4-4"></path>
+      </svg>
+      <span class="sr-only">Next</span>
+    </span>
+  </button>
 </div>
+
+<script>
+  document.querySelectorAll('[data-carousel="true"]').forEach((carousel) => {
+    const slides = carousel.querySelectorAll('[data-slide]') as NodeListOf<HTMLElement>;
+    const indicators = carousel.querySelectorAll('[data-carousel-indicator]');
+    const prevBtn = carousel.querySelector('[data-carousel-prev]');
+    const nextBtn = carousel.querySelector('[data-carousel-next]');
+    
+    let currentIndex = 0;
+    let autoplayTimer: number | null = null;
+    let isTransitioning = false;
+    
+    const autoplay = carousel.getAttribute('data-autoplay') === 'true';
+    const interval = parseInt(carousel.getAttribute('data-interval') || '5000');
+
+    function showSlide(index: number, direction: 'next' | 'prev' = 'next') {
+      if (isTransitioning) return;
+      isTransitioning = true;
+
+      const oldIndex = currentIndex;
+      currentIndex = index;
+
+      // Set up positions before transition
+      slides.forEach((slide, i) => {
+        slide.style.transition = 'none';
+        if (i === oldIndex) {
+          slide.style.transform = 'translateX(0)';
+        } else if (i === currentIndex) {
+          if (direction === 'next') {
+            slide.style.transform = 'translateX(100%)';
+          } else {
+            slide.style.transform = 'translateX(-100%)';
+          }
+        } else {
+          slide.style.transform = i < currentIndex ? 'translateX(-100%)' : 'translateX(100%)';
+        }
+      });
+
+      // Force reflow
+      void (carousel as HTMLElement).offsetHeight;
+
+      // Enable transitions and animate
+      slides.forEach((slide, i) => {
+        slide.style.transition = 'transform 700ms ease-in-out';
+        if (i === oldIndex) {
+          if (direction === 'next') {
+            slide.style.transform = 'translateX(-100%)';
+          } else {
+            slide.style.transform = 'translateX(100%)';
+          }
+          slide.setAttribute('aria-hidden', 'true');
+        } else if (i === currentIndex) {
+          slide.style.transform = 'translateX(0)';
+          slide.setAttribute('aria-hidden', 'false');
+        }
+      });
+
+      // Update indicators
+      indicators.forEach((indicator, i) => {
+        if (i === currentIndex) {
+          indicator.classList.remove('bg-white/50');
+          indicator.classList.add('bg-white');
+          indicator.setAttribute('aria-current', 'true');
+        } else {
+          indicator.classList.remove('bg-white');
+          indicator.classList.add('bg-white/50');
+          indicator.setAttribute('aria-current', 'false');
+        }
+      });
+
+      setTimeout(() => {
+        isTransitioning = false;
+      }, 700);
+    }
+
+    function nextSlide() {
+      const nextIndex = (currentIndex + 1) % slides.length;
+      showSlide(nextIndex, 'next');
+    }
+
+    function prevSlide() {
+      const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+      showSlide(prevIndex, 'prev');
+    }
+
+    function startAutoplay() {
+      if (autoplay) {
+        autoplayTimer = window.setInterval(nextSlide, interval);
+      }
+    }
+
+    function stopAutoplay() {
+      if (autoplayTimer) {
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+    }
+
+    // Event listeners
+    nextBtn?.addEventListener('click', () => {
+      nextSlide();
+      stopAutoplay();
+      startAutoplay();
+    });
+
+    prevBtn?.addEventListener('click', () => {
+      prevSlide();
+      stopAutoplay();
+      startAutoplay();
+    });
+
+    indicators.forEach((indicator, index) => {
+      indicator.addEventListener('click', () => {
+        if (index !== currentIndex) {
+          const direction = index > currentIndex ? 'next' : 'prev';
+          showSlide(index, direction);
+          stopAutoplay();
+          startAutoplay();
+        }
+      });
+    });
+
+    // Start autoplay
+    startAutoplay();
+
+    // Pause on hover
+    carousel.addEventListener('mouseenter', stopAutoplay);
+    carousel.addEventListener('mouseleave', startAutoplay);
+  });
+</script>
