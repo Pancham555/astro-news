@@ -151,33 +151,87 @@ import { NAVIGATION_LINKS, OTHER_LINKS, SITE } from "@/lib/config";
 </style>
 
 <script>
-  const toggle = document.getElementById("sidebar-toggle");
-  const close = document.getElementById("sidebar-close");
-  const sidebar = document.getElementById("sidebar");
-  const overlay = document.getElementById("sidebar-overlay");
+  function initializeSidebar() {
+    const toggle = document.getElementById("sidebar-toggle");
+    const close = document.getElementById("sidebar-close");
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("sidebar-overlay");
 
-  function openSidebar() {
-    sidebar?.classList.add("active");
-    overlay?.classList.add("active");
-    document.body.classList.add("sidebar-open");
-    toggle?.setAttribute("aria-expanded", "true");
-  }
-
-  function closeSidebar() {
-    sidebar?.classList.remove("active");
-    overlay?.classList.remove("active");
-    document.body.classList.remove("sidebar-open");
-    toggle?.setAttribute("aria-expanded", "false");
-  }
-
-  toggle?.addEventListener("click", openSidebar);
-  close?.addEventListener("click", closeSidebar);
-  overlay?.addEventListener("click", closeSidebar);
-
-  // Close on escape key
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && sidebar?.classList.contains("active")) {
-      closeSidebar();
+    // Check if elements exist
+    if (!toggle || !close || !sidebar || !overlay) {
+      console.warn("Sidebar elements not found, retrying...");
+      return false;
     }
-  });
+
+    let currentToggle = toggle;
+    let currentClose = close;
+    let currentOverlay = overlay;
+
+    function openSidebar() {
+      sidebar?.classList.add("active");
+      const overlayElement = document.getElementById("sidebar-overlay");
+      if (overlayElement) {
+        overlayElement.classList.add("active");
+      }
+      document.body.classList.add("sidebar-open");
+      const toggleElement = document.getElementById("sidebar-toggle");
+      if (toggleElement) {
+        toggleElement.setAttribute("aria-expanded", "true");
+      }
+    }
+
+    function closeSidebar() {
+      sidebar?.classList.remove("active");
+      const overlayElement = document.getElementById("sidebar-overlay");
+      if (overlayElement) {
+        overlayElement.classList.remove("active");
+      }
+      document.body.classList.remove("sidebar-open");
+      const toggleElement = document.getElementById("sidebar-toggle");
+      if (toggleElement) {
+        toggleElement.setAttribute("aria-expanded", "false");
+      }
+    }
+
+    // Remove old event listeners by cloning
+    const newToggle = currentToggle.cloneNode(true);
+    const newClose = currentClose.cloneNode(true);
+    const newOverlay = currentOverlay.cloneNode(true);
+    
+    currentToggle.parentNode?.replaceChild(newToggle, currentToggle);
+    currentClose.parentNode?.replaceChild(newClose, currentClose);
+    currentOverlay.parentNode?.replaceChild(newOverlay, currentOverlay);
+
+    // Add event listeners to new elements
+    newToggle.addEventListener("click", openSidebar);
+    newClose.addEventListener("click", closeSidebar);
+    newOverlay.addEventListener("click", closeSidebar);
+
+    // Close on escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && sidebar.classList.contains("active")) {
+        closeSidebar();
+      }
+    });
+
+    return true;
+  }
+
+  // Try to initialize immediately
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeSidebar);
+  } else {
+    initializeSidebar();
+  }
+
+  // Fallback: retry after a short delay if initial attempt fails
+  setTimeout(() => {
+    const sidebar = document.getElementById("sidebar");
+    if (!sidebar || !sidebar.dataset.initialized) {
+      initializeSidebar();
+    }
+  }, 100);
+
+  // For Astro view transitions (if you're using them)
+  document.addEventListener("astro:page-load", initializeSidebar);
 </script>
