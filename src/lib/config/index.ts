@@ -3,7 +3,7 @@ import type { Link } from "../types";
 export const SITE = {
   title: "The Nomad",
   description: "A news website built with Astro",
-  author: "Mohammad Rahmani",
+  author: "Pancham Barman",
   url: "https://the-nomad.vercel.app",
   github: "https://github.com/Pancham555/astro-news",
   locale: "en-US",
@@ -19,8 +19,8 @@ export const NAVIGATION_LINKS: Link[] = [
     text: "Technology",
   },
   {
-    href: "/categories/programming",
-    text: "Programming",
+    href: "/categories/education",
+    text: "Education",
   },
   {
     href: "/categories/lifestyle",
