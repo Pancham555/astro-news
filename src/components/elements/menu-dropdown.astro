@@ -1,7 +1,6 @@
 ---
 import Menu from "@/assets/svgs/menu.astro";
 import { NAVIGATION_LINKS, OTHER_LINKS, SITE } from "@/lib/config";
-import NavbarItem from "../bases/navbar-item.astro";
 ---
 
 <div class="sidebar-wrapper">
@@ -36,8 +35,7 @@ import NavbarItem from "../bases/navbar-item.astro";
     <ul class="menu p-4 w-full h-full bg-base-100 text-base">
       <li><a href="/" aria-label="Homepage">Home</a></li>
       <li>
-        <NavbarItem item={{ href: "/articles", text: "Articles" }} />
-        <!-- <a href="/articles" aria-label="Articles Page">Articles</a> -->
+        <a href="/articles" aria-label="Articles Page">Articles</a>
       </li>
 
       <li>
@@ -47,7 +45,10 @@ import NavbarItem from "../bases/navbar-item.astro";
             {
               NAVIGATION_LINKS.map(({ href, text, target }) => (
                 <li>
-                  <NavbarItem item={{href,text,target}}/>
+                    <a href={href} 
+                  aria-label={text}>
+                    {text}
+                  </a>
                 </li>
               ))
             }
