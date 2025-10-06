@@ -10,7 +10,7 @@ import react from "@astrojs/react";
 import { loadEnv } from "vite";
 import pagefind from "astro-pagefind";
 
-// import vercel from "@astrojs/vercel";
+import vercel from "@astrojs/vercel";
 
 const { RUN_KEYSTATIC } = loadEnv(import.meta.env.MODE, process.cwd(), "");
 
@@ -41,5 +41,5 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  // adapter: vercel()
+  adapter: vercel()
 });
