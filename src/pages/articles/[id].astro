@@ -6,6 +6,8 @@ import ArticleHeader from "./_components/article-header.astro";
 
 import { articlesHandler } from "@/lib/handlers/articles";
 
+import TableWrapper from "./_components/table-wrapper.astro";
+
 export const getStaticPaths = async () => {
   const articles = articlesHandler.allArticles();
 
@@ -17,6 +19,10 @@ export const getStaticPaths = async () => {
 const { article } = Astro.props;
 
 const { Content, remarkPluginFrontmatter } = await render(article);
+const componentOverrides = {
+    table: TableWrapper,
+    // Add any other overrides here if needed (e.g., h2, p, etc.)
+};
 ---
 
 <BaseLayout entry={article}>
@@ -25,6 +31,6 @@ const { Content, remarkPluginFrontmatter } = await render(article);
     readingTime={remarkPluginFrontmatter.minutesRead}
   />
   <ContentLayout>
-    <Content />
+    <Content components={componentOverrides}/>
   </ContentLayout>
 </BaseLayout>
