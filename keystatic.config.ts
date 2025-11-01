@@ -15,6 +15,8 @@ export default config({
     navigation: ["---", "articles", "---", "authors", "categories"],
   },
   collections: {
+    entryLayout: 'content',
+    format: { contentField: 'content' },
     articles: articlesKs,
     authors: authorsKs,
     categories: categoriesKs,
