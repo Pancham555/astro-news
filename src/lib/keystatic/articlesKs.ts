@@ -6,7 +6,7 @@ export const articlesKs = collection({
   path: "src/content/articles/*/",
   entryLayout: 'content',
   format: { contentField: "content" },
-  entryLayout: "form",
+  // entryLayout: "form",
   schema: {
     isDraft: fields.checkbox({
       label: "Is this a draft?",
