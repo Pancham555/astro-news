@@ -4,6 +4,7 @@ export const articlesKs = collection({
   label: "Articles",
   slugField: "title",
   path: "src/content/articles/*/",
+  entryLayout: 'content',
   format: { contentField: "content" },
   entryLayout: "form",
   schema: {
